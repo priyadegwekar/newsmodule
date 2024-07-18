@@ -1,0 +1,122 @@
+<?php
+
+use Drupal\file\Entity\File;
+use Drupal\Component\Utility\UrlHelper;
+
+/**
+ * @file
+ * Functions to support theming in the wellhall theme.
+ */
+
+/**
+ * Implements hook_preprocess_HOOK() for page.html.twig.
+ */
+function wellhall_preprocess_page(&$variables)
+{
+  //Get Site Info
+  $config = \Drupal::config('system.site');
+  $variables['site_name'] = $config->get('name');
+  $variables['site_slogan'] = $config->get('slogan');
+
+  // Get the current URL.
+  $current_url = \Drupal::request()->getRequestUri();
+  if (isset($current_url)) {
+    $current_path = explode("/", $current_url);
+    $variables['current_path'] = $current_path[2];
+  }
+
+  // Assign Variable for Slider.
+  if ($variables['is_front']) {
+    if (theme_get_setting('show_slideshow', 'wellhall') == 1) {
+      $variables['show_slideshow'] = 1;
+      $variables['slider_content'] = wellhall_get_slider_content();
+    }
+  }
+
+  // Footer Social Icons Variable.
+  $variables['show_social_icons'] = theme_get_setting('show_social_icons');
+  $variables['facebook_url'] = theme_get_setting('facebook_url');
+  $variables['instagram_url'] = theme_get_setting('instagram_url');
+  $variables['twitter_url'] = theme_get_setting('twitter_url');
+  $variables['linkedin_url'] = theme_get_setting('linkedin_url');
+
+  //Copyright text.
+  $variables['copyright_text'] = theme_get_setting('copyright_text');
+  $variables['show_copyright'] = theme_get_setting('show_copyright');
+
+  $variables['#attached']['library'][] = 'wellhall/stickynavbar';
+
+  //Footer Layout.
+  if (theme_get_setting('no_of_footer', 'wellhall')) {
+    $variables['footer_content'] = wellhall_get_footer_content();
+  }
+
+  //Footer Section.
+  $variables['about_title'] = theme_get_setting('about_title', 'wellhall');
+  $variables['about_description'] = theme_get_setting('about_description', 'wellhall');
+
+  $variables['contact_title'] = theme_get_setting('contact_title', 'wellhall');
+  $variables['contact_description'] = theme_get_setting('contact_description', 'wellhall');
+
+  //Get Variable for Scroll Top.
+  $variables['scrolltotop_on'] = theme_get_setting('scrolltotop_on', 'wellhall');
+
+  //Footer Newsletter.
+  $variables['footer_newsletter_on'] = theme_get_setting('footer_newsletter_on', 'wellhall');
+}
+
+/**
+ * Slider
+ * Implements custom function for get slider content.
+ */
+function wellhall_get_slider_content()
+{
+  $slider_content = [];
+  for ($i = 1; $i <= theme_get_setting('no_of_slides'); $i++) {
+    $fid = theme_get_setting('slide_video' . $i . '_video', 'wellhall');
+    if (!empty($fid)) {
+      $file = File::load($fid[0]);
+      $file_uri = $file->getFileUri();
+      $path = \Drupal::service('file_url_generator')->generateAbsoluteString($file_uri);
+    } else {
+      $path = \Drupal::service('extension.list.theme')->getPath('wellhall') . '/assets/video/slide' . $i . '.mp4';
+    }
+
+    $slider_content[$i] = '<div class="mySlides">
+        <video autoplay loop muted>
+        <source src="' . $path . '" type="video/mp4">
+        Your browser does not support the video tag.
+        </video>
+        <div class="slider-caption" animate__bounceInDown  data-aos="fade-up" data-aos-delay="150">
+          <h2 class="slider-title">' . theme_get_setting('slide_title_' . $i, 'wellhall') . '</h2>
+          <div class="clearfix"><p class="slider-description">' . theme_get_setting('slide_description_' . $i, 'wellhall') . '</p>
+          </div>
+        </div>
+      </div>';
+  }
+  return $slider_content;
+}
+
+/**
+ * Footer
+ * Implements custom function for get footer content.
+ */
+function wellhall_get_footer_content()
+{
+  $footer_content = [];
+  for ($i = 1; $i <= theme_get_setting('no_of_footer'); $i++) {
+    $footer_content[$i] = '<h2 class="slider-title">' . theme_get_setting('footer_description_' . $i, 'wellhall') . '</h2>';
+  }
+  return $footer_content;
+}
+
+function wellhall_preprocess_html(&$variables)
+{
+  // Add logged in class to the body.
+  $logged_in = \Drupal::currentUser()->isAuthenticated();
+  if ($logged_in) {
+    $variables['attributes']['class'][] = 'logged-in';
+  } else {
+    $variables['attributes']['class'][] = 'logged-out';
+  }
+}

@@ -1,0 +1,30 @@
+uuid: 099640fd-69ed-4a88-b254-34c9eb65ed24
+langcode: en
+status: true
+dependencies:
+  module:
+    - addtoany
+    - system
+  theme:
+    - mysubtheme
+id: mysubtheme_addtoanysharebuttons
+theme: mysubtheme
+region: content
+weight: 0
+provider: null
+plugin: addtoany_block
+settings:
+  id: addtoany_block
+  label: 'AddToAny share buttons'
+  label_display: '0'
+  provider: addtoany
+  context_mapping: {  }
+  buttons_size: null
+  addtoany_html: ''
+  link_url: ''
+  link_title: ''
+visibility:
+  request_path:
+    id: request_path
+    negate: true
+    pages: "/news\r\n/newss"

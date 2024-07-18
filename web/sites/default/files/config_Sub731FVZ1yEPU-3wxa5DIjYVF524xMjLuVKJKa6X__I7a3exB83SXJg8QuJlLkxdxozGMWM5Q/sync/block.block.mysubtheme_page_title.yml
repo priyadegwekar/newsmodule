@@ -1,0 +1,26 @@
+uuid: 57e71982-ad31-49df-8c3b-bb2d932c70ba
+langcode: en
+status: true
+dependencies:
+  module:
+    - system
+  theme:
+    - mysubtheme
+_core:
+  default_config_hash: 1TQP4b3ZnlzvIH9bj6cpCz_SyUHdJjLQkZnHpikjjhw
+id: mysubtheme_page_title
+theme: mysubtheme
+region: header
+weight: 0
+provider: null
+plugin: page_title_block
+settings:
+  id: page_title_block
+  label: 'Page title'
+  label_display: '0'
+  provider: core
+visibility:
+  request_path:
+    id: request_path
+    negate: true
+    pages: /news

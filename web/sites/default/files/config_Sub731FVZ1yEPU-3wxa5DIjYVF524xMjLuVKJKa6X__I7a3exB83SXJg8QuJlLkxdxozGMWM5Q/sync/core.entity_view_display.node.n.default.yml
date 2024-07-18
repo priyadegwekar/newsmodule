@@ -1,0 +1,39 @@
+uuid: 64d363d6-4cfd-4f80-b382-8e5f07772e91
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.n.body
+    - field.field.node.n.field_top_news
+    - node.type.n
+  module:
+    - text
+    - user
+id: node.n.default
+targetEntityType: node
+bundle: 'n'
+mode: default
+content:
+  body:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 101
+    region: content
+  field_top_news:
+    type: boolean
+    label: above
+    settings:
+      format: default
+      format_custom_false: ''
+      format_custom_true: ''
+    third_party_settings: {  }
+    weight: 102
+    region: content
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 100
+    region: content
+hidden: {  }

@@ -1,0 +1,25 @@
+<?php
+
+/**
+ * @file
+ * Bootstrap sub-theme.
+ *
+ * Place your custom PHP code in this file.
+ */
+
+
+/**
+ * Preprocess function for node.html.twig.
+ */
+function mysubtheme_preprocess_node(&$variables) {
+    $block = \Drupal\block\Entity\Block::load('mysubtheme_views_block__news_block_2');
+    $variables['latest_news'] = \Drupal::entityTypeManager()
+    ->getViewBuilder('block')
+    ->view($block);
+
+    $block_one = \Drupal\block\Entity\Block::load('mysubtheme_views_block__news_block_1');
+    $variables['top_news'] = \Drupal::entityTypeManager()
+    ->getViewBuilder('block')
+    ->view($block_one);
+}
+  

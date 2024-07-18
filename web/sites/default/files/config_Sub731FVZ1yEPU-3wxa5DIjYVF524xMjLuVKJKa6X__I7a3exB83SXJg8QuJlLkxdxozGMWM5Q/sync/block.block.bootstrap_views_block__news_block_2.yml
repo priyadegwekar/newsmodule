@@ -1,0 +1,29 @@
+uuid: b81c7689-fe27-4ac0-9846-a77eb9cb99c3
+langcode: en
+status: true
+dependencies:
+  config:
+    - views.view.news
+  module:
+    - system
+    - views
+  theme:
+    - bootstrap
+id: bootstrap_views_block__news_block_2
+theme: bootstrap
+region: content
+weight: 0
+provider: null
+plugin: 'views_block:news-block_2'
+settings:
+  id: 'views_block:news-block_2'
+  label: ''
+  label_display: visible
+  provider: views
+  views_label: ''
+  items_per_page: none
+visibility:
+  request_path:
+    id: request_path
+    negate: false
+    pages: /news

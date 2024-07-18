@@ -1,0 +1,156 @@
+{% set front_header = is_front ? 'front-header' : 'nofront-header' %}
+<div class="layout-container {{front_header}}">
+    <!-- Start: Header Section -->
+  <header id="header" class="header d-flex align-items-center main-header">
+    <div class="container">
+      <nav class="navbar navbar-expand-lg navbar-light .bg-transparent">
+        <div class="container">
+          {% if page.logo %}
+            {{ page.logo }}
+          {% endif %}
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+          <div class="collapse navbar-collapse justify-content-end m-auto" id="navbarNavDropdown">
+            {% if page.navigation %}
+              {{ page.navigation }}
+            {% endif %}
+            {% if page.search %}
+              <div class="full-page-search">
+                <div class="search-icon">
+                  <a href="#"><i class="fa fa-search" aria-hidden="true"></i></a>
+                </div>
+                <div class="search-box">
+                  <div class="search-close"></div>
+                  <div class="search-content">{{ page.search }}</div>
+                  <div class="search-close">×</div>
+                </div>
+              </div>
+            {% endif %}
+          </div>
+        </div>
+        <div class="align-items-end d-flex"></div>
+      </nav>
+    </div>
+  </header>
+      <!-- End: Header Section -->
+  <main role="main">
+    <a id="main-content" tabindex="-1"></a>
+    <!-- Start: Slider Section -->
+    {% if is_front %}
+      <section class="slider-section">
+        {% if show_slideshow %}
+          <div class="container-fluid p-0">
+            {% for slider_contents in slider_content %}
+              {{ slider_contents|raw }}
+            {% endfor %}
+            <a class="prev" onclick="plusSlides(-1)">❮</a>
+            <a id="next" class="next" onclick="plusSlides(1)">❯</a>
+          </div>
+        {% endif %}
+      </section>
+    {% endif %}
+    <!-- End: Slider Section -->
+      <!-- Start: Content Section -->
+    <div class="layout-content container" data-aos="fade-right " data-aos-delay="250">
+      {% if not is_front %}
+        <div class="inner-content">
+        <div class="wellhall-breadcrumb">
+          {{ page.breadcrumb }}
+        </div>
+      {% endif %}
+      <div class="tabs">{{ page.tabs }}</div>
+      <div class="page-title">{{ page.page_title }}</div>
+      <div class="highlighted">{{ page.highlighted }}</div>
+      {{ page.content }}
+      {% if not is_front %} 
+        </div>
+      {% endif %}
+    </div>
+  </main>
+    <!-- End: Content Section -->
+      <!-- Start: Footer Section -->
+  <section id="last-section" class="section"></section>
+  <footer id="footer" class="footer">
+    <div class="footer-content position-relative">
+      <div class="container">
+        <div class="row fl">
+          <div class="col-md-4 footer-links">
+            {% if page.footer_one %}
+              {{ page.footer_one }}
+            {% endif %}
+
+            {% if about_title %}
+              <h2>{{ about_title }}</h2>
+            {% endif %}
+            {% if about_description %}
+              <p class="wellhall-about">{{ about_description|striptags('<ul><li><p>')|raw }}</p>
+            {% endif %}
+
+            {% if show_social_icons %}
+              <div class="social-links">
+                {% if twitter_url %}
+                  <a href="{{ twitter_url }}" class="d-flex align-items-center justify-content-center"><i class="fab fa-x-twitter"></i></a>
+                {% endif %}
+                {% if facebook_url %}
+                  <a href="{{ facebook_url }}" class="d-flex align-items-center justify-content-center"><i class="fab fa-facebook"></i></a>
+                {% endif %}
+                {% if instagram_url %}
+                  <a href="{{ instagram_url }}" class="d-flex align-items-center justify-content-center"><i class="fab fa-instagram"></i></a>
+                {% endif %}
+                {% if linkedin_url %}
+                  <a href="{{ linkedin_url }}" class="d-flex align-items-center justify-content-center"><i class="fab fa-linkedin"></i></a>
+                {% endif %}
+              </div>
+            {% endif %}
+          </div>
+          <div class="col-md-4 footer-links mt">
+            {% if page.footer_two %}
+              {{ page.footer_two }}
+            {% endif %}
+            {% if contact_title %}
+              <h2>{{ contact_title }}</h2>
+            {% endif %}
+            {% if contact_description %}
+              {{ contact_description|striptags('<ul><li><p>')|raw }}
+            {% endif %}
+          </div>
+          <div class="col-md-4 footer-links mt">
+            {% if page.footer_three %}
+              {{ page.footer_three }}
+            {% endif %}
+            {% if footer_newsletter_on == 1 %}
+              <h2>Subscribe</h2>
+              <div class="form-group row form-row align-items-center mb-0">
+                <div class="col-sm-9">
+                  <input type="email" class="form-control" placeholder="{{ 'Email Address'|t }}" />
+                </div>
+                <div class="col-sm-3">
+                  <a href="#" class="btn btn-light subscribe">{{ 'Subscribe'|t }}</a>
+                </div>
+              </div>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="footer-legal text-center position-relative">
+      <div class="container">
+        <div class="copyright">
+          {% if show_copyright %}
+            {% if copyright_text %}
+              <p class="footer-para">
+                <span id="displayYear">© {{ 'now'|date('Y') }} {{ site_name }}</span>
+                {{ copyright_text }}
+              </p>
+            {% endif %}
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </footer>
+    <!-- End: Footer Section -->
+  {% if scrolltotop_on %}
+    <div class="scrolltop">
+      <i class="fa fa-angle-up" aria-hidden="true"></i>
+    </div>
+  {% endif %}
+</div>

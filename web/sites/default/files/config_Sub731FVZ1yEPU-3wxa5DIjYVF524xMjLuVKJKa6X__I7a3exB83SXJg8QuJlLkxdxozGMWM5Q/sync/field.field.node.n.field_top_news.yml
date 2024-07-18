@@ -1,0 +1,21 @@
+uuid: fac635d7-7521-404e-b39f-67700e5a6bee
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_top_news
+    - node.type.n
+id: node.n.field_top_news
+field_name: field_top_news
+entity_type: node
+bundle: 'n'
+label: 'Top News'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

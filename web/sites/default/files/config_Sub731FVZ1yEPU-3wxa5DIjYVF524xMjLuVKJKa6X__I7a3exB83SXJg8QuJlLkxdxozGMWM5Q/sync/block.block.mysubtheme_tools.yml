@@ -1,0 +1,27 @@
+uuid: bcb001b6-a5ba-45de-9980-33e0416bc21c
+langcode: en
+status: false
+dependencies:
+  config:
+    - system.menu.tools
+  module:
+    - system
+  theme:
+    - mysubtheme
+_core:
+  default_config_hash: SrPItPkAevw9hGX_v5AfsVyw6vkoog7ZVLSJYqwsBHc
+id: mysubtheme_tools
+theme: mysubtheme
+region: sidebar_second
+weight: 0
+provider: null
+plugin: 'system_menu_block:tools'
+settings:
+  id: 'system_menu_block:tools'
+  label: Tools
+  label_display: visible
+  provider: system
+  level: 1
+  depth: 0
+  expand_all_items: false
+visibility: {  }

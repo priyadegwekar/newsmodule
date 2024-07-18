@@ -1,0 +1,20 @@
+name: WellHall
+type: theme
+base theme: false
+description: A flexible theme with a responsive, mobile-first layout.
+package: Custom
+core_version_requirement: ^8.8 || ^9 || ^10
+libraries:
+  - wellhall/global
+regions:
+  logo: Logo
+  navigation: Navigation
+  banner: Banner
+  highlighted: Highlighted
+  page_title: Page Title
+  tabs: Tabs
+  breadcrumb: Breadcrumb
+  content: Content
+  footer_one: Footer First
+  footer_two: Footer Second
+  footer_three: Footer Third
